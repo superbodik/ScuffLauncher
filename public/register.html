@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+</head>
+<body>
+  <h1>Register</h1>
+  <form id="register-form">
+    <input type="text" id="reg-username" placeholder="Username" required>
+    <input type="password" id="reg-password" placeholder="Password" required>
+    <button type="submit">Register</button>
+  </form>
+  <p id="reg-message"></p>
+  <button id="show-login">Back to Logins</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const registerForm = document.getElementById('register-form');
+      const showLoginBtn = document.getElementById('show-login');
+      const regMessage = document.getElementById('reg-message');
+
+      // Handle registration
+      registerForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const username = document.getElementById('reg-username').value;
+        const password = document.getElementById('reg-password').value;
+
+        try {
+          const response = await fetch('localhost:3000/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+          });
+          if (response.ok) {
+            document.getElementById('reg-message').textContent = 'Registration successful.';
+          } else {
+            document.getElementById('reg-message').textContent = 'Registration failed.';
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          document.getElementById('reg-message').textContent = 'Registration failed.';
+        }
+      });
+
+      // Show login form
+      showLoginBtn.addEventListener('click', () => {
+        window.history.back(); // Go back to the previous page (login page)
+      });
+    });
+  </script>
+</body>
+</html>

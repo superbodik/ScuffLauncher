@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="login-form">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <input type="password" id="pa2ssword" placeholder="P2assword" required>
+    <button type="submit">Login</button>
+  </form>
+  <p id="auth-message"></p>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const loginForm = document.getElementById('login-form');
+      const authMessage = document.getElementById('auth-message');
+      
+      // Load saved authentication data
+      const { success, data } = await window.electron.loadAuthData();
+      if (success && data) {
+        document.getElementById('username').value = data.username || '';
+        document.getElementById('password').value = data.password || '';
+      }
+
+      loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+          const response = await fetch('http://localhost:3000/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const result = await response.json();
+          if (result.success) {
+            // Save authentication data
+            await window.electron.saveAuthData({ username, password });
+            // Redirect or handle successful login
+          } else {
+            authMessage.textContent = 'Login failed.';
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          authMessage.textContent = 'Login failed.';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

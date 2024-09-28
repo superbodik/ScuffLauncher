@@ -1,0 +1,29 @@
+
+<link rel="stylesheet" href="../css/mod.css">
+<div id="upload-component">
+<form id="upload-form" method="POST" action="/api/modpacks" enctype="multipart/form-data">
+  <input type="text" name="name" required placeholder="Name">
+  <textarea name="description" required placeholder="Description"></textarea>
+  <select name="modloader" id="modloader" required>
+    <option value="" disabled selected>Select a loader</option>
+    <option value="fabric">Fabric</option>
+    <option value="forge">Forge</option>
+  </select>
+
+  <select name="version" id="version" required>
+      <option value="" disabled selected>Select a version</option>
+      <option value="1.20.1">1.20.1</option>
+      <option value="1.19.4">1.19.4</option>
+      <option value="1.18.2">1.18.2</option>
+  </select>
+
+  <label for="image">Upload Image (JPG, PNG):</label>
+  <input type="file" name="image" id="image" accept="image/*" required>
+
+  <label for="file">Upload Modpack (ZIP):</label>
+  <input type="file" name="file" id="file" accept=".zip" required>
+
+  <button type="submit">Upload</button>
+  <script src="./upload.js"></script>
+</form>
+</div>

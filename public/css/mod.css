@@ -1,0 +1,26 @@
+
+  #upload-component {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  #upload-component input,
+  #upload-component textarea {
+    display: block;
+    width: 90%;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  #upload-component button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  #upload-component button:hover {
+    background-color: #45a049;
+  }
+

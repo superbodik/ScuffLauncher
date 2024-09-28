@@ -1,0 +1,29 @@
+body{
+    background-color: black;
+}
+
+.left-panel {
+    width: 200px;
+    background-color: #f0f0f0;
+    height: 100vh;
+    float: left;
+}
+
+.content-panel {
+    margin-left: 210px;
+    padding: 20px;
+}
+
+button {
+    display: block;
+    margin: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}

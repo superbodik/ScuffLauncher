@@ -1,0 +1,14 @@
+fetch('http://localhost:3000/auth/register-page', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: 'testuser',
+      password: 'password123'
+    })
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+  
