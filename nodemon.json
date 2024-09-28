@@ -1,0 +1,7 @@
+{
+    "watch": ["main.js", "renderer.js", "src/**/*"],
+    "ext": "js,json,html,css",
+    "exec": "electron .",
+    "delay": "2500"
+  }
+  

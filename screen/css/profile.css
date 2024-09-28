@@ -1,0 +1,93 @@
+body {
+    background-image: url('../../img/menu/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+    overflow: hidden; 
+    display: block;
+}
+
+.login-menubg {
+    width: 465px;
+    height: 565px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 45px 40px;
+    border-radius: 33px;
+    background: #111111;
+    position: relative;
+    top: 40px;
+}
+
+.mainscreen-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 0;
+}
+
+.login-reg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 90px;
+}
+
+.logo-text-frame {
+    position: relative;
+    top: 40px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.logo-text-frame h2 {
+    margin: 0;
+}
+
+.logo-text-frame img {
+    height: 40px;
+    width: 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #151515;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #212121;
+    border-radius: 5px;
+    background: #151515;
+    color: #FFFFFF;
+}
+
+.toggle-btnReg {
+    margin-top: 20px;
+    color: blue;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-decoration: underline;
+}
+
+.show-form {
+    display: block;
+}
+
+.hide-form {
+    display: none;
+}

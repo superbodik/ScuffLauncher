@@ -1,0 +1,170 @@
+body {
+    background-image: url('../../img/menu/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: block;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    background-color: rgba(14, 14, 14, 0.30);
+    border-right: 1.2px solid #FFFFFF0F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.Logo {
+    width: 35.5px;
+    height: 35.35px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.profile-section {
+    margin-bottom: 100px;
+    top: 160px;
+}
+
+.profile-button {
+    width: 52px;
+    height: 52px;
+    position: relative;
+    border-radius: 50%;
+    background-color: #0E0E0E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 125px;
+}
+
+.profile-button button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.profile-button img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+    display: block;
+}
+
+.home-button {
+    width: 19px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.home-button img {
+    width: 10px;
+    height: 10px;
+    object-fit: contain;
+    display: block;
+}
+
+.button-container {
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 45px;
+    background-color: #1A1A1A;
+    width: 40px;
+    height: 170px;
+    overflow-x: hidden;
+    top: 40px;
+    position: relative;
+}
+
+.side-button {
+    width: 47px;
+    height: 47px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    position: relative;
+    right: 3px;
+    top: 9px;
+}
+
+.side-button.selected {
+    background-color: rgb(55, 146, 55);
+}
+
+.side-button img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
+}
+
+.logaut-img {
+    width: 47px;
+    height: 47px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    position: relative;
+    top: 90px;
+}
+.side-button img {
+    width: 45px; 
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 0; 
+  }
+.logaut {
+    width: 16px;
+    height: 17px;
+    object-fit: contain;
+    display: block;
+    left: 1px;
+    position: relative;
+}
+
+.side-button:hover {
+    background-color: #555;
+}
+
+.button-container::-webkit-scrollbar {
+    width: 0.6px;
+}
+
+.button-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.button-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.button-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

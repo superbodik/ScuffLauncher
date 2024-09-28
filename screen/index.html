@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScuffLauncher</title>
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/modinfo.css">
+  <style>
+    .profile-info {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      color: #FFFFFF;
+    }
+    .profile-info img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+    .profile-info button {
+      background: none;
+      border: none;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <img src="../img/menu/Iconly/Bulk/Logo.png" alt="Profile" class="Logo">
+    <div class="profile-section">
+      <div>
+        <button id="profile-btn" class="profile-button">
+          <img src="../img/menu/Iconly/Bulk/Profile.png" alt="Profile">
+        </button>
+      </div>
+    </div>
+    <div class="button-container" id="modpack-buttons"></div>
+    <button id="close-btn" class="logout-img">
+      <img src="../img/menu/Iconly/Bulk/Logout.svg" alt="Logout" class="logout">
+    </button>
+  </div>
+  
+  <div class="profile-info">
+    <img id="profile-skin" src="../img/default-skin.png" alt="Profile Skin">
+    <span id="username">Username</span>
+    <button id="update-skin-btn">Update Skin</button>
+  </div>
+  
+  <div id="progress-container" style="display: none;">
+    <div id="progress-bar" style="width: 0%; height: 20px; background-color: green;"></div>
+  </div>
+
+  <div class="modpack-details" id="modpack-details" style="display: none;">
+    <div>
+      <h3 id="modpack-name" data-modpack-id="">Modpack Name</h3>
+      <p id="modpack-description">Modpack Description</p>
+      <div class="position-button"> 
+        <button id="play-button" class="play-button">Play</button>
+        <button id="settings-button" class="settings-button">Settings</button>
+        <button id="mod-button" class="mod-button">
+          <img src="../img/menu/Iconly/Bulk/Document.svg" class="mod-buttonimg" alt="Mods">
+          <span>Mod List</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3000/api'; // Define the API URL
+  
+    async function installModpack(modpackId) {
+      const progressContainer = document.getElementById('progress-container');
+      const progressBar = document.getElementById('progress-bar');
+  
+      try {
+        progressContainer.style.display = 'block'; // Show progress bar
+        const response = await fetch(`${API_URL}/install/${modpackId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          alert(`Error: ${errorData.message}`);
+          return;
+        }
+  
+        const data = await response.json();
+        alert(data.message); // Show success message
+      } catch (error) {
+        console.error('Error during installation:', error);
+        alert('Error during installation');
+      } finally {
+        progressContainer.style.display = 'none'; // Hide progress bar
+        progressBar.style.width = '0%'; // Reset progress bar
+      }
+    }
+  
+    document.getElementById('play-button').onclick = async () => {
+      const modpackId = document.getElementById('modpack-name').dataset.modpackId; 
+      await installModpack(modpackId);
+    };
+
+    function loadUserProfile() {
+      fetch('http://localhost:3000/user/profile', {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Change to JSON instead of text
+      })
+      .then(jsonData => {
+        document.getElementById('username').textContent = jsonData.username;
+        document.getElementById('profile-skin').src = jsonData.skinUrl || '../img/default-skin.png';
+      })
+      .catch(error => {
+        console.error('Error loading user profile:', error);
+      });
+    }
+
+    document.getElementById('update-skin-btn').addEventListener('click', () => {
+      const newSkinUrl = prompt('Enter the URL for the new profile skin:');
+      if (newSkinUrl) {
+        fetch('http://localhost:3000/user/update-skin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: JSON.stringify({ skinUrl: newSkinUrl })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById('profile-skin').src = newSkinUrl;
+        })
+        .catch(error => {
+          console.error('Error updating skin:', error);
+        });
+      }
+    });
+
+    function loadModpacks() {
+      fetch(`${API_URL}/modpacks`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const container = document.getElementById('modpack-buttons');
+          container.innerHTML = ''; 
+  
+          data.forEach(modpack => {
+            const button = document.createElement('button');
+            button.className = 'side-button';
+            button.onclick = () => showModpackDetails(modpack); // Show modpack details on click
+  
+            const img = document.createElement('img');
+            img.src = modpack.image;
+            img.alt = modpack.name;
+  
+            button.appendChild(img);
+            container.appendChild(button);
+          });
+        })
+        .catch(error => {
+          console.error('Error loading modpacks:', error);
+        });
+    }
+
+    function showModpackDetails(modpack) {
+      document.getElementById('modpack-name').textContent = modpack.name;
+      document.getElementById('modpack-description').textContent = modpack.description;
+      document.getElementById('modpack-name').dataset.modpackId = modpack._id; // Store modpack ID
+      document.getElementById('modpack-details').style.display = 'block'; // Show modpack details
+    }
+  
+    loadUserProfile();
+    loadModpacks();
+    setInterval(loadModpacks, 10000); 
+  </script>
+  
+  <script src="../script/renderer.js"></script>
+  <script src="../script/window.js"></script>
+  <script src="../script/control.js"></script>
+</body>
+</html>

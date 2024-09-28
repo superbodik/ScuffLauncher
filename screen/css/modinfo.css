@@ -1,0 +1,78 @@
+.modpack-details{
+    width: 404px;
+    height: 331px;
+    top: 135px;
+    left: 536px;
+    gap: 0px;
+    border-radius: 20px 0px 0px 0px;
+    border: 1px 0px 0px 0px;
+    opacity: 0.77px;
+    background: #0E0E0E;
+    border: 1px solid #FFFFFF0F;
+    position: relative;
+    border-radius: 10px;
+    color: #fff;
+    
+}
+.modpack-name{
+    height: 40px;
+    width:90px;
+    background: linear-gradient(180deg, #009046 0%, #008542 100%);
+    position: relative;
+    right: 389px; 
+    border-radius: 90px;
+    color: #fff;
+}
+.position-button{
+    position: relative;
+}
+.play-button{
+    height: 40px;
+    width:90px;
+    background: linear-gradient(180deg, #009046 0%, #008542 100%);
+    position: inherit;
+    right: 389px; 
+    border-radius: 90px;
+    color: #fff;
+}
+.settings-button{
+    height: 40px;
+    width:110px;
+    background: #121212;
+    position: relative;
+    right: 379px; 
+    border-radius: 90px;
+    color: #fff;
+}
+.mod-button{
+    height: 40px;
+    width:150px;
+    background: #121212;
+    position: relative;
+    right: 599px; 
+    border-radius: 90px;
+    color: #fff;
+    top: 200px; 
+
+}
+.mod-button a{
+    top: -2px;
+    position: relative;
+}
+.mod-buttonimg{
+    height: 20px;
+    width:20px;
+    top: 2px;
+    right: 8px ;
+    position: relative;
+}
+
+.modpack-details h3{
+    position: relative;
+    right: 380px;
+    top: -50px;
+}
+.modpack-details p{
+    position: relative;
+    top: -50px;
+}

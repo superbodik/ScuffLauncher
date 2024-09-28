@@ -1,0 +1,42 @@
+{
+  "name": "SkuffLauncher",
+  "version": "0.0.1",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.yourapp.id",
+    "productName": "SkuffLauncher",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!*.md",
+      "!test"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^32.1.0",
+    "electron-builder": "^25.0.5",
+    "electron-reload": "^2.0.0-alpha.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "electron-is-dev": "^3.0.1"
+  }
+}
